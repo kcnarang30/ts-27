@@ -65,7 +65,7 @@
   /* ───────── Scroll section ─────────
      The section is tall; .stage is sticky, so it stays on screen while the
      page scrolls through the section. Change the height to change the pace. */
-  .intro { position: relative; height: 820vh; }
+  .intro { position: relative; height: 750vh; }
   .stage {
     position: sticky; top: 0;
     height: 100vh; height: 100svh;
@@ -153,6 +153,16 @@
     text-shadow: 0 10px 60px rgba(0,0,0,.45);
   }
   .hero__title em { display: block; font-style: normal; font-size: .36em; letter-spacing: .34em; color: var(--muted); padding-bottom: .55em; }
+  .hero__title-logo {
+    display: block;
+    width: min(76cqw, 420px);
+    max-width: 100%;
+    height: auto;
+    margin: 1.4cqh auto 0;
+  }
+  @media (min-width: 720px) {
+    .hero__title-logo { width: min(64cqw, 920px); }
+  }
   .hero__meta { font: 500 max(10px, 1.05cqw)/1.4 var(--ui); letter-spacing: .16em; text-transform: uppercase; }
   .hero__meta span { color: white; }
   .hero__cta { display: flex; gap: 12px; justify-content: center; margin-top: 4.5cqh; pointer-events: none; }
@@ -164,32 +174,6 @@
   /* Masked line reveal */
   .line { display: block; overflow: hidden; padding-bottom: .06em; }
   .line > span { display: block; will-change: transform; }
-
-  /* ───────── Character ─────────
-     A figure in the shadows: pure-black silhouette, lit only from behind
-     (thin rim light + the haze of the light beyond him), reflected on the floor. 
-  .character {
-    position: absolute; left: 50%; bottom: 9vh; z-index: 5;
-    height: min(50vh, 520px); aspect-ratio: var(--aspect, .34);
-    transform-origin: 50% var(--ground, 100%);
-    will-change: transform;
-    pointer-events: none;
-  }*/
-  .character .figure-canvas {current frame + its floor reflection, drawn on demand 
-    position: absolute; left: 0; top: 0; width: 100%; height: 160%; pointer-events: none;
-    filter:
-      drop-shadow(-1px -.5px .6px rgba(150, 175, 255, .6))
-      drop-shadow(1px -.5px .6px rgba(255, 160, 130, .55));
-  }
-  /*.character .backlight {
-    position: absolute; left: 50%; top: 2%; width: 340%; aspect-ratio: 1.15;
-    transform: translateX(-50%);
-    background:
-      radial-gradient(ellipse 22% 30% at 50% 40%, rgba(255, 230, 215, .18), transparent 70%),
-      radial-gradient(ellipse 50% 50% at 42% 45%, rgba(110, 130, 255, .12), transparent 70%),
-      radial-gradient(ellipse 50% 50% at 58% 45%, rgba(255, 70, 80, .12), transparent 70%);
-    filter: blur(6px);
-  }*/
 
   /* ───────── Overlays ───────── */
   .intro-title {
@@ -209,14 +193,10 @@
 
   .hud {
     position: absolute; left: var(--gutter); right: var(--gutter); bottom: 28px; z-index: 7;
-    display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+    display: flex; justify-content: flex-end; align-items: flex-end; gap: 24px;
     font: 500 11px/1 var(--ui); letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
     pointer-events: none;
   }
-  .chapters { display: flex; gap: 26px; }
-  .chapters li { list-style: none; transition: color .6s var(--ease), opacity .6s var(--ease); opacity: .4; }
-  .chapters li.is-active { color: var(--ink); opacity: 1; }
-  .chapters li b { font-weight: 500; color: var(--red); margin-right: 8px; }
   .progress { display: flex; align-items: center; gap: 14px; }
   .progress span { font-variant-numeric: tabular-nums; min-width: 3ch; text-align: right; }
   .progress em { display: block; width: min(18vw, 180px); height: 1px; background: rgba(255,255,255,.18); position: relative; }
@@ -276,10 +256,8 @@
   .reveal { will-change: transform, opacity; }
 
   @media (max-width: 719px) {
-    .chapters li:not(.is-active) { display: none; }
     .topbar .pill { display: none; }
     .intro-title { top: 13vh; padding: 0 16px; }
-    .character { height: 42vh; bottom: 12vh; }
     .scroll-cue { display: none; }
     .days__head { grid-template-columns: 1fr; }
     .days__grid { grid-template-columns: 1fr; }
@@ -325,32 +303,17 @@
     <!-- Headline + grade over the final hero frame (never scaled; fades in) -->
     <div class="hero-overlay" id="heroOverlay">
         <div class="hero__copy">
-          <p class="hero__eyebrow"><span class="line"><span>YourStory presents · 18th Edition</span></span></p>
+          <!--<p class="hero__eyebrow"><span class="line"><span>YourStory presents · 18th Edition</span></span></p>-->
           <h2 class="hero__title">
-            <span class="line"><span><em>The</em></span></span>
-            <span class="line"><span>Intelligence</span></span>
-            <span class="line"><span>Economy</span></span>
+            <!--<span class="line"><span><em>The</em></span></span>-->
+            <img class="hero__title-logo" id="heroTitleLogo" src="assets/ts-logo.png" alt="TechSparks Logo">
           </h2>
-          <p class="hero__meta"><span class="line"><span>TechSparks 2027 <span>·</span> Bengaluru <span>·</span> Three days. One story.</span></span></p>
+          <p class="hero__meta"><span class="line"></span> Bengaluru <span>·</span> October'27 </span></span></p>
           <div class="hero__cta" id="heroCta">
             <span class="line"><span><a class="pill pill--solid" href="#days">Register interest <i>→</i></a></span></span>
             <span class="line"><span><a class="pill" href="#days">Explore the three days</a></span></span>
           </div>
         </div>
-    </div>
-
-    <!-- ─────────────────────────────────────────────────────────────
-         CHARACTER — a hooded figure walking away from camera, in the shadows.
-         The walk is a sprite sheet: 24 frames side by side, rendered from a
-         rigged 3D human (see tools/character/). The scroll steps through the
-         frames, so his stride follows the scroll exactly.
-         REPLACE: set CHARACTER.src / frames in the script (a single PNG works
-         too: frames: 1). Rim light: .figure-canvas CSS; reflection: drawFigure().
-         Turn the figure (and his glow) off with SHOW_PERSON = false in the script.
-         ───────────────────────────────────────────────────────────── -->
-    <div class="character" id="character" aria-hidden="true">
-      <div class="backlight"></div>
-      <canvas class="figure-canvas" id="figureCanvas"></canvas>
     </div>
 
     <div class="intro-title" id="introTitle">
@@ -363,8 +326,6 @@
     <div class="scroll-cue" id="scrollCue"><span>Scroll to enter</span><i></i></div>
 
     <div class="hud">
-      <ol class="chapters" id="chapters">
-      </ol>
       <div class="progress"><span id="progressNum">00</span><em><i id="progressBar"></i></em></div>
     </div>
 
@@ -431,7 +392,7 @@
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
 <script>
 /* ════════════════════════════════════════════════════════════════════
-   PANELS — the photos orbiting the character.
+   PANELS — the photos orbiting the focal point.
    REPLACE: point `src` at your own images (any aspect ratio; set `aspect`
    to width / height so the panel frames it correctly).
    `mobile: false` hides a panel on small screens.
@@ -456,35 +417,22 @@ const PANELS = [
   { src: 'assets/panels/07-rings.webp',                     aspect: 1.09, mobile: false },
 ];
 
-/* PERSON — set to false for the version without the walking figure (and his glow). */
-const SHOW_PERSON = true;
-
-/* CHARACTER — sprite-sheet walk cycle (see tools/character/) */
-const CHARACTER = {
-  src: 'assets/character-walk.webp',   // ← REPLACE with your own sprite sheet / PNG
-  frames: 24,                          // frames laid out left → right
-  aspect: 393 / 1177,                  // one frame's width / height
-  ground: 0.9592,                      // average floor line (fraction of frame height)
-  // lowest foot in each frame — the reflection mirrors about this so it always touches his feet
-  contact: [0.9320, 0.9388, 0.9465, 0.9541, 0.9609, 0.9660, 0.9762, 0.9864, 0.9983, 0.9932, 0.9703, 0.9550,
-            0.9431, 0.9371, 0.9431, 0.9499, 0.9541, 0.9635, 0.9745, 0.9839, 0.9924, 0.9805, 0.9575, 0.9422],
-  strides: 10,                         // walk cycles over the whole scroll
-  strideLength: 460,                   // floor travel per cycle (px at his depth)
-};
+/* FLOOR — corridor-floor animation pace (previously driven by the walking figure's stride) */
+const FLOOR_CYCLES = 10;         // travel cycles over the whole scroll
+const FLOOR_CYCLE_LENGTH = 460;  // floor travel per cycle (px at the focal depth)
 
 /* ════════════════════════════════════════════════════════════════════
    TIMING — scroll progress (0 → 1) at which each phase starts / ends.
    ════════════════════════════════════════════════════════════════════ */
 const T = {
   titleOut:  [0.015, 0.10],  // opening headline leaves
-  orbit:     [0.00, 0.54],   // panels orbit the character
+  orbit:     [0.00, 0.54],   // panels orbit the focal point
   converge:  [0.30, 0.64],   // panels swing into the wall behind the hero (staggered)
   push:      [0.60, 0.93],   // camera pushes into the hero image
   heroCopy:  [0.84, 0.96],   // hero headline + buttons reveal
   // 0.96 → 1.00 is the hold on the final frame
 };
 const ORBIT_SWEEP = 112;      // degrees the ring turns during the orbit phase
-const CHAPTERS = [0, 0.30, 0.60, 0.86];
 
 /* ════════════════════════════════════════════════════════════════════
    Implementation
@@ -492,7 +440,7 @@ const CHAPTERS = [0, 0.30, 0.60, 0.86];
 gsap.registerPlugin(ScrollTrigger);
 
 const $ = id => document.getElementById(id);
-const scene = $('scene'), heroEl = $('hero'), character = $('character'), heroOverlay = $('heroOverlay');
+const scene = $('scene'), heroEl = $('hero'), heroOverlay = $('heroOverlay');
 const floorCanvas = $('floorCanvas'), fctx = floorCanvas.getContext('2d');
 const O = { x: 0, y: 0 };   // camera vanishing point on screen (px), updated each frame
 const PERSPECTIVE = 1100, ORIGIN_Y = 0.42;
@@ -519,7 +467,7 @@ const panels = PANELS.map((cfg, i) => {
     cfg, el, i,
     vis: true,
     tier: [0, -1, 1][i % 3],                                // mid / top / low ring
-    rad: [1.0, 1.32, 0.94, 1.5, 1.14, 1.4][i % 6],          // distance from character
+    rad: [1.0, 1.32, 0.94, 1.5, 1.14, 1.4][i % 6],          // distance from the focal point
     size: [1.0, 0.9, 1.1, 0.85, 1.05, 0.95][(i + 2) % 6],
     phase: i * 1.7,                                         // idle float offset
   };
@@ -534,7 +482,7 @@ function measure() {
   const n = active.length;
 
   const R = mobile ? vw * 0.9 : Math.min(vw * 0.42, 760);
-  const baseH = mobile ? clamp(vh * 0.16, 110, 160) : clamp(vh * 0.25, 150, 270);
+  const baseH = mobile ? clamp(vh * 0.21, 140, 200) : clamp(vh * 0.33, 200, 350);
   const cols = mobile ? 4 : 6;
   const wallR = 2.3, colDeg = mobile ? 17 : 15;
   const chord = 2 * wallR * R * Math.sin(colDeg / 2 * DEG);   // slot spacing on the wall (world px)
@@ -554,9 +502,8 @@ function measure() {
   L.heroStartR = 3.4;
   L.dolly = L.charZ + L.heroR * R * 0.92;                     // distance the camera travels to reach the hero
 
-  // floor height: put the plane exactly under his feet at his depth
-  character.style.marginBottom = `${(-(1 - CHARACTER.ground) * character.offsetHeight).toFixed(1)}px`;
-  const feetY = character.offsetTop + character.offsetHeight * CHARACTER.ground;  // ground line, px from top of the stage
+  // floor height: fixed ground line at the focal depth
+  const feetY = vh * 0.88;  // ground line, px from top of the stage
   const sAtChar = PERSPECTIVE / (PERSPECTIVE + L.charZ);
   L.floorY = (feetY - ORIGIN_Y * vh) / sAtChar - (0.5 - ORIGIN_Y) * vh;
   // floor canvas at 1× — its lines and glows are soft, so extra resolution only costs time
@@ -564,7 +511,6 @@ function measure() {
   floorCanvas.width = Math.round(vw * L.dpr);
   floorCanvas.height = Math.round(vh * L.dpr);
   lastFloorKey = '';
-  sizeFigureCanvas();
 
   const span = mobile ? 300 : 320;
   active.forEach((p, k) => {
@@ -718,62 +664,11 @@ function renderCopy(p) {
   scrollCue.style.opacity = (clamp(introK * 2 - 1) * (1 - range(p, [0, 0.04]))).toFixed(3);
 }
 
-// walking character (drawn on a small canvas: current frame + its reflection) + the floor
-const figCanvas = $('figureCanvas'), gctx = figCanvas.getContext('2d');
-character.style.setProperty('--aspect', CHARACTER.aspect);
-character.style.setProperty('--ground', `${CHARACTER.ground * 100}%`);
-if (!SHOW_PERSON) character.style.visibility = 'hidden';   // kept in layout only to position the floor
-const sheet = new Image();
-if (SHOW_PERSON) { sheet.onload = () => (lastFrame = -1); sheet.src = CHARACTER.src; }
-const REFLECT = 0.6;          // the canvas reaches 60% of his height below his box, for the reflection
-let lastFrame = -1;
-function sizeFigureCanvas() {
-  if (!SHOW_PERSON) return;
-  const d = Math.min(devicePixelRatio || 1, 2);
-  figCanvas.width = Math.round(character.offsetWidth * d);
-  figCanvas.height = Math.round(character.offsetHeight * (1 + REFLECT) * d);
-  lastFrame = -1;
-}
-function drawFigure(frame) {
-  if (!sheet.complete || !sheet.naturalWidth) return false;
-  const c = gctx, W = figCanvas.width, H = figCanvas.height / (1 + REFLECT);
-  const fw = sheet.naturalWidth / CHARACTER.frames, fh = sheet.naturalHeight;
-  c.setTransform(1, 0, 0, 1, 0, 0);
-  c.globalCompositeOperation = 'source-over';
-  c.clearRect(0, 0, W, figCanvas.height);
-  c.drawImage(sheet, frame * fw, 0, fw, fh, 0, 0, W, H);
-  // reflection: mirrored about this frame's foot-contact line, slightly stretched, faded with distance
-  const yc = (CHARACTER.contact ? CHARACTER.contact[frame] : CHARACTER.ground) * H;
-  c.save();
-  c.globalAlpha = 0.55;
-  c.translate(0, yc); c.scale(1, -1.15); c.translate(0, -yc);
-  c.drawImage(sheet, frame * fw, 0, fw, fh, 0, 0, W, H);
-  c.restore();
-  c.globalCompositeOperation = 'destination-out';
-  const g = c.createLinearGradient(0, yc, 0, yc + H * 0.4);
-  g.addColorStop(0, 'rgba(0,0,0,0.1)'); g.addColorStop(1, 'rgba(0,0,0,1)');
-  c.fillStyle = g; c.fillRect(0, yc, W, figCanvas.height - yc);
-  c.globalCompositeOperation = 'source-over';
-  return true;
-}
-function renderCharacter(p) {
+// the floor: corridor light, grid (sliding toward the camera) and the vignette
+function renderFloor(p) {
   const push = ease.inOut(range(p, T.push));
-  const walkP = Math.min(p, 0.93) * CHARACTER.strides;     // stride follows the scroll; rests at the end
-  if (SHOW_PERSON) {
-    // he walks on into the light and dissolves as the camera pushes past him
-    const gone = smooth(0.1, 0.5, range(p, T.push));
-    const scale = lerp(1, 0.72, gone);
-    const rise = lerp(0, -5, gone);                        // vh — feet move up toward the horizon as he recedes
-    const frame = Math.floor((walkP % 1) * CHARACTER.frames) % CHARACTER.frames;
-    if (frame !== lastFrame && drawFigure(frame)) lastFrame = frame;
-    character.style.transform =
-      `translateX(-50%) translate3d(${(mouse.x * -5).toFixed(2)}px,${rise.toFixed(2)}vh,0) scale(${scale.toFixed(4)})`;
-    character.style.opacity = (clamp(introK * 2) * (1 - gone)).toFixed(3);
-    const cv = gone < 0.999;
-    if (cv !== character._vis) { character.style.visibility = cv ? 'visible' : 'hidden'; character._vis = cv; }
-  }
-  // the corridor light, the floor (grid slides toward the camera with the walk) and the vignette
-  drawScene(p, walkP * CHARACTER.strideLength, dollyAt(p), clamp(introK * 1.5) * (1 - smooth(0.3, 0.85, push)));
+  const travel = Math.min(p, 0.93) * FLOOR_CYCLES * FLOOR_CYCLE_LENGTH;
+  drawScene(p, travel, dollyAt(p), clamp(introK * 1.5) * (1 - smooth(0.3, 0.85, push)));
 }
 
 // ── scene canvas: corridor light + floor + vignette (redrawn only when something changed) ──
@@ -852,10 +747,8 @@ function drawScene(p, travel, dolly, alpha) {
     c.fillStyle = g; c.beginPath(); c.arc(0, 0, rx * k, 0, Math.PI * 2); c.fill();
     c.restore();
   };
-  if (SHOW_PERSON) {                                             // pool of light at his feet
-    glow(0, -L.charZ, 230, 'rgba(255, 220, 205, 0.16)', 0.28);
-    glow(0, -L.charZ, 520, 'rgba(255, 150, 140, 0.06)', 0.3);
-  }
+  glow(0, -L.charZ, 230, 'rgba(255, 220, 205, 0.16)', 0.28);     // pool of light at the focal point
+  glow(0, -L.charZ, 520, 'rgba(255, 150, 140, 0.06)', 0.3);
   const [sx1, sy1] = pt(0, FLOOR.far), [sx2, sy2] = pt(0, -L.charZ - 200);
   const sg = c.createLinearGradient(sx1, sy1, sx2, sy2);
   sg.addColorStop(0, 'rgba(255, 215, 205, 0.12)'); sg.addColorStop(1, 'rgba(255, 215, 205, 0)');
@@ -879,8 +772,6 @@ function drawVignette(c) {   // darkened edges (was a separate full-screen layer
 
 // atmosphere, camera, HUD
 const aurora = $('aurora'), bar = $('progressBar'), num = $('progressNum');
-const chapterEls = [...$('chapters').children];
-let lastCh = -1;
 function renderWorld(p) {
   const push = ease.inOut(range(p, T.push));
   const drift = Math.sin(p * Math.PI * 1.5) * (1 - push);
@@ -892,8 +783,6 @@ function renderWorld(p) {
   bar.style.transform = `scaleX(${p.toFixed(4)})`;
   const n = String(Math.round(p * 100)).padStart(2, '0');
   if (n !== num._v) { num.textContent = n; num._v = n; }
-  let ch = 0; CHAPTERS.forEach((c, i) => { if (p >= c) ch = i; });
-  if (ch !== lastCh) { chapterEls.forEach((li, i) => li.classList.toggle('is-active', i === ch)); lastCh = ch; }
 }
 
 const state = { p: 0 };
@@ -904,7 +793,7 @@ function render() {
   renderHero(p);
   restack();
   renderCopy(p);
-  renderCharacter(p);
+  renderFloor(p);
 }
 
 // ── smooth scroll (Lenis) + scroll-linked progress ──
@@ -972,7 +861,6 @@ gsap.utils.toArray('.reveal').forEach((el, i) => {
 
 // ── preloader: count up, then open onto the stage ──
 const imgs = [...document.images];
-if (SHOW_PERSON) imgs.push(sheet);
 let loaded = 0;
 const shown = { v: 0 };
 const loadCount = $('loadCount'), loadBar = $('loadBar');
