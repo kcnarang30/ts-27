@@ -8,20 +8,30 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+   @font-face {
+    font-family: "Neo Vector";
+    src: url("assets/font/Neo-Vector.otf") format("opentype");
+    font-weight: 100 900; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "Public Sans";
+    src: url("assets/font/PublicSans-Regular.ttf") format("truetype");
+    font-weight: 100 900; font-style: normal; font-display: swap;
+  }
   :root {
     --bg: #050508;
     --ink: #f3f1ee;
     --muted: rgba(243, 241, 238, .56);
     --faint: rgba(243, 241, 238, .14);
     --red: #e3262f;
-    --display: "Michroma", "Eurostile", "Arial Black", sans-serif;
-    --ui: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    --display: "Neo Vector",  sans-serif;
+    --ui2: "Public Sans", sans-serif;
     --ease: cubic-bezier(.16, 1, .3, 1);
     --gutter: clamp(16px, 4vw, 56px);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: var(--bg); color: var(--ink); overflow-x: clip; }
-  body { font-family: var(--ui); -webkit-font-smoothing: antialiased; }
+  body { font-family: var(--ui2); -webkit-font-smoothing: antialiased; }
   html.lenis, html.lenis body { height: auto; }
   .lenis.lenis-smooth { scroll-behavior: auto !important; }
   img { display: block; }
@@ -43,7 +53,7 @@
   .pill {
     pointer-events: auto; color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
     border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 12px 20px;
-    font: 500 11px/1 var(--ui); letter-spacing: .16em; text-transform: uppercase;
+    font: 500 11px/1 var(--ui2); letter-spacing: .16em; text-transform: uppercase;
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); background: rgba(255,255,255,.04);
     transition: background .5s var(--ease), border-color .5s var(--ease), color .5s var(--ease);
   }
@@ -137,14 +147,14 @@
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     text-align: center; padding: 0 6cqw; margin-top: -22cqh;
   }
-  .hero__eyebrow { font: 500 max(9px, 1cqw)/1 var(--ui); letter-spacing: .32em; text-transform: uppercase; color: var(--muted); }
+  .hero__eyebrow { font: 500 max(9px, 1cqw)/1 var(--ui2); letter-spacing: .32em; text-transform: uppercase; color: var(--muted); }
   .hero__title {
     font: 400 7.2cqw/1.02 var(--display); letter-spacing: -.01em; text-transform: uppercase;
     margin: 2.6cqh 0 2.8cqh;
     text-shadow: 0 10px 60px rgba(0,0,0,.45);
   }
   .hero__title em { display: block; font-style: normal; font-size: .36em; letter-spacing: .34em; color: var(--muted); padding-bottom: .55em; }
-  .hero__meta { font: 500 max(10px, 1.05cqw)/1.4 var(--ui); letter-spacing: .16em; text-transform: uppercase; }
+  .hero__meta { font: 500 max(10px, 1.05cqw)/1.4 var(--ui2); letter-spacing: .16em; text-transform: uppercase; }
   .hero__meta span { color: var(--red); }
   .hero__cta { display: flex; gap: 12px; justify-content: center; margin-top: 4.5cqh; pointer-events: none; }
   .hero__cta.is-live { pointer-events: auto; }
@@ -183,16 +193,11 @@
   }
 
   /* ───────── Overlays ───────── */
-  .intro-title {
-    position: absolute; left: 0; right: 0; top: 14vh; z-index: 6;
-    text-align: center; pointer-events: none;
-  }
-  .intro-title p { font: 500 11px/1 var(--ui); letter-spacing: .34em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; }
-  .intro-title h1 { font: 400 clamp(30px, 5.2vw, 84px)/1.04 var(--display); text-transform: uppercase; letter-spacing: -.01em; }
-  .scroll-cue {
+ 
+    .scroll-cue {
     position: absolute; right: var(--gutter); bottom: 76px; z-index: 7;
     display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
-    font: 500 10px/1 var(--ui); letter-spacing: .34em; text-transform: uppercase; color: var(--muted);
+    font: 500 10px/1 var(--ui2); letter-spacing: .34em; text-transform: uppercase; color: var(--muted);
     pointer-events: none;
   }
   .scroll-cue i { display: block; width: 1px; height: 38px; background: linear-gradient(var(--ink), transparent); transform-origin: top; animation: cue 2.2s var(--ease) infinite; }
@@ -201,7 +206,7 @@
   .hud {
     position: absolute; left: var(--gutter); right: var(--gutter); bottom: 28px; z-index: 7;
     display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
-    font: 500 11px/1 var(--ui); letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
+    font: 500 11px/1 var(--ui2); letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
     pointer-events: none;
   }
   .chapters { display: flex; gap: 26px; }
@@ -241,7 +246,7 @@
   /* ───────── After the intro: three days ───────── */
   .days { position: relative; z-index: 1; background: var(--bg); padding: 18vh var(--gutter) 14vh; }
   .days__head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 24px; border-bottom: 1px solid var(--faint); padding-bottom: 34px; }
-  .days__head p { font: 500 11px/1 var(--ui); letter-spacing: .32em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; }
+  .days__head p { font: 500 11px/1 var(--ui2); letter-spacing: .32em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; }
   .days__head h2 { font: 400 clamp(28px, 4.4vw, 68px)/1.04 var(--display); text-transform: uppercase; letter-spacing: -.01em; max-width: 14ch; }
   .days__head .pill { margin-bottom: 6px; }
   .days__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--faint); border-bottom: 1px solid var(--faint); }
@@ -256,20 +261,19 @@
   }
   .day:hover { background: #09090d; }
   .day:hover::before { opacity: 1; }
-  .day__tag { display: inline-block; font: 500 11px/1 var(--ui); letter-spacing: .26em; text-transform: uppercase; color: var(--red); }
+  .day__tag { display: inline-block; font: 500 11px/1 var(--ui2); letter-spacing: .26em; text-transform: uppercase; color: var(--red); }
   .day h3 { font: 400 clamp(30px, 3.2vw, 52px)/1 var(--display); text-transform: uppercase; margin: 34px 0 14px; letter-spacing: -.01em; }
   .day h3 small { display: block; font-size: .42em; color: var(--muted); letter-spacing: .3em; margin-bottom: 10px; }
-  .day__order { font: 500 11px/1.4 var(--ui); letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
-  .day__q { font: 400 clamp(17px, 1.35vw, 21px)/1.4 var(--ui); margin: 38px 0 26px; max-width: 26ch; }
+  .day__order { font: 500 11px/1.4 var(--ui2); letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+  .day__q { font: 400 clamp(17px, 1.35vw, 21px)/1.4 var(--ui2); margin: 38px 0 26px; max-width: 26ch; }
   .day ul { list-style: none; position: relative; }
-  .day li { font: 400 14px/1.45 var(--ui); color: rgba(243,241,238,.72); padding: 13px 0; border-top: 1px solid var(--faint); }
-  .footer { display: flex; justify-content: space-between; gap: 24px; padding: 34px var(--gutter); font: 500 11px/1 var(--ui); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--faint); }
+  .day li { font: 400 14px/1.45 var(--ui2); color: rgba(243,241,238,.72); padding: 13px 0; border-top: 1px solid var(--faint); }
+  .footer { display: flex; justify-content: space-between; gap: 24px; padding: 34px var(--gutter); font: 500 11px/1 var(--ui2); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--faint); }
   .reveal { will-change: transform, opacity; }
 
   @media (max-width: 719px) {
     .chapters li:not(.is-active) { display: none; }
     .topbar .pill { display: none; }
-    .intro-title { top: 13vh; padding: 0 16px; }
     .character { height: 42vh; bottom: 12vh; }
     .scroll-cue { display: none; }
     .days__head { grid-template-columns: 1fr; }
@@ -290,10 +294,7 @@
 </div>
 <div class="grain" aria-hidden="true"></div>
 
-<header class="topbar">
-  <div class="logo"><small>YourStory</small><b>TechSparks</b></div>
-  <a class="pill" href="#days">Register interest <i>→</i></a>
-</header>
+
 
 <section class="intro" id="intro">
   <div class="stage" id="stage">
@@ -322,7 +323,7 @@
             <span class="line"><span>Intelligence</span></span>
             <span class="line"><span>Economy</span></span>
           </h2>
-          <p class="hero__meta"><span class="line"><span>TechSparks 2027 <span>·</span> Bengaluru <span>·</span> Three days. One story.</span></span></p>
+          
           <div class="hero__cta" id="heroCta">
             <span class="line"><span><a class="pill pill--solid" href="#days">Register interest <i>→</i></a></span></span>
             <span class="line"><span><a class="pill" href="#days">Explore the three days</a></span></span>
@@ -345,20 +346,12 @@
     </div>
 
     <div class="intro-title" id="introTitle">
-      <p class="line"><span>TechSparks 2027 · Bengaluru</span></p>
-      <h1>
-        <span class="line"><span>Three days.</span></span>
-        <span class="line"><span>One story.</span></span>
-      </h1>
     </div>
     <div class="scroll-cue" id="scrollCue"><span>Scroll to enter</span><i></i></div>
 
     <div class="hud">
       <ol class="chapters" id="chapters">
-        <li><b>01</b>Arrive</li>
-        <li><b>02</b>Orbit</li>
-        <li><b>03</b>Converge</li>
-        <li><b>04</b>Enter</li>
+        
       </ol>
       <div class="progress"><span id="progressNum">00</span><em><i id="progressBar"></i></em></div>
     </div>
